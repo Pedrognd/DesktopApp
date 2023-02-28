@@ -11,9 +11,8 @@ class AppPasswordGenerator(Tk):
     super().__init__()
 
     # Definições Padrões
-    self.title('Gerador de Senha')
-    self.geometry('375x312')
-    self.resizable(0,0)
+    self.title('Gerenciador de Contas')
+    self.geometry('800x600')
     self.DefaultFont = ('Arial',10,'bold')
     self.EntryFont = ('Arial',10)
     s = c.Style()
@@ -24,14 +23,19 @@ class AppPasswordGenerator(Tk):
     self.columnconfigure(0, weight=1)
     self.columnconfigure(1, weight=1)
     
+    self.FirstLabel = c.Label(self)
+    self.FirstLabel['text'] = 'Gerador de senha'
+    self.FirstLabel['font'] = ('Arial',20,'bold')
+    self.FirstLabel.grid(column=0,row=0,sticky=W, **self.DefaultPadding)
+
     self.BttGenerator = c.Button(self)
     self.BttGenerator['text'] = 'Gerar Senha!'
     self.BttGenerator['command'] = self.Generator
-    self.BttGenerator.grid(column=0,row=0,columnspan=2,sticky=N, **self.DefaultPadding)
+    self.BttGenerator.grid(column=0,row=1,sticky=W, **self.DefaultPadding)
 
     self.CopyPassword =  c.Entry(self)
-    self.CopyPassword['width'] = 50
-    self.CopyPassword.grid(column=0,row=2,columnspan=2,sticky=N, **self.DefaultPadding)
+    self.CopyPassword['width'] = 40
+    self.CopyPassword.grid(column=0,row=2,sticky=W, **self.DefaultPadding)
 
   def Generator(self):  
     valores = string.ascii_letters + string.digits
