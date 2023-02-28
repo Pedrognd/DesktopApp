@@ -31,12 +31,26 @@ class AppPasswordGenerator(Tk):
     self.BttGenerator = c.Button(self)
     self.BttGenerator['text'] = 'Gerar Senha!'
     self.BttGenerator['command'] = self.Generator
+    # self.BttGenerator['state'] = DISABLED
     self.BttGenerator.grid(column=0,row=1,sticky=W, **self.DefaultPadding)
 
     self.CopyPassword =  c.Entry(self)
     self.CopyPassword['width'] = 40
     self.CopyPassword.grid(column=0,row=2,sticky=W, **self.DefaultPadding)
 
+    self.QuestionLabel = c.Label(self)
+    self.QuestionLabel['text'] = ('Deseja vincular a uma conta existente?')
+    self.QuestionLabel['font'] = self.DefaultFont
+    self.QuestionLabel.grid(column=0,row=3,sticky=W, **self.DefaultPadding)
+
+    self.SelectOption0 = c.Radiobutton(self)
+    self.SelectOption0['text'] = 'Sim'
+    self.SelectOption0.grid(column=0,row=4,sticky=W, **self.DefaultPadding)
+
+    self.SelectOption1 = c.Radiobutton(self)
+    self.SelectOption1['text'] = 'Não'
+    self.SelectOption1.grid(column=1,row=4,sticky=W, **self.DefaultPadding)   
+    
   def Generator(self):  
     valores = string.ascii_letters + string.digits
     senha = ''
