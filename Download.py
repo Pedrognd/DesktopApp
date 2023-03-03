@@ -24,7 +24,6 @@ class AppDownload(Tk):
         # Definindo padrões
         self.geometry('375x340')
         self.title('Download')
-        # self.iconbitmap('.\\baixar.ico')
         self.configure(bg='#3F3C52')
         self.DefaultBg = '#3F3C52'
 
@@ -99,7 +98,6 @@ class AppDownload(Tk):
         self.RadioBtt0['font'] = (self.DefaultFont,10,'bold')
         self.RadioBtt0['value'] = 0
         self.RadioBtt0['variable'] = self.CheckVar
-        # self.RadioBtt0['foreground'] = 'white'
         self.RadioBtt0['bg'] = self.DefaultBg
         self.RadioBtt0.pack(side=LEFT,**self.DefaultPadding)
 
@@ -108,7 +106,6 @@ class AppDownload(Tk):
         self.RadioBtt01['font'] = (self.DefaultFont,10,'bold')
         self.RadioBtt01['value'] = 1
         self.RadioBtt01['variable'] = self.CheckVar
-        # self.RadioBtt01['foreground'] = 'white'
         self.RadioBtt01['bg'] = self.DefaultBg
         self.RadioBtt01.pack(side=LEFT,**self.DefaultPadding)
 
@@ -124,6 +121,7 @@ class AppDownload(Tk):
         self.BttOpen['command'] = self.OpenFileLocation
         self.BttOpen.pack(**self.DefaultPadding)
 
+    # Função para Selecionar o diretorio de destino
     def SelectDir(self):
 
       file = dlg.askdirectory(initialdir= '/')
@@ -132,6 +130,7 @@ class AppDownload(Tk):
       else:
           self.BttDir['text'] = file
 
+    # Função de Download
     def DownloadFunction(self):
             if self.CheckVar.get() == 0:
                 link = self.Entry0.get()
@@ -157,9 +156,11 @@ class AppDownload(Tk):
                         os.remove(mp4_path)                    #Remove o arquivo .MP4
                 self.BttOpen['text'] = 'Download Completo!'
 
+    #   Função de abrir local do arquivo, onde foi baixado o Mp3/Mp4
     def OpenFileLocation(self):
         webbrowser.open(os.path.realpath(self.BttDir['text'] + '/Downloads'))
 
+#   Loop para iniciar a janela
 if __name__ == "__main__":
   root = AppDownload()
   root.mainloop()

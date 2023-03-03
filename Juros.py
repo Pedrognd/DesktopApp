@@ -118,6 +118,7 @@ class AppDownload(Tk):
         self.BttCalculate['command'] = self.Calculate
         self.BttCalculate.pack(**self.DefaultPadding)
 
+    # Função para fazer o calculo de juros.
     def Calculate(self):
       try:
         Value = int(self.ValueEntry.get())
@@ -127,18 +128,22 @@ class AppDownload(Tk):
       except ValueError:
          messagebox.showerror('Alerta','Preencha todos os campos!')
 
-
+      # Formatação de data para transformar em date() 
       dt1dia,dt1mes,dt1ano = int(DataInicio[0:2]), int(DataInicio[3:5]), int(DataInicio[6:10])      
       dt2dia,dt2mes,dt2ano = int(DataFinal[0:2]), int(DataFinal[3:5]), int(DataFinal[6:10])
 
+      # Passando date-> string para date->date() 
       Data1f = date(dt1ano,dt1mes,dt1dia)
       Data2f = date(dt2ano,dt2mes,dt2dia) 
-
+      
+      # Subtração das datas para saber a diferença entre elas 
       Delta = Data2f - Data1f
       DataTra = Data1f
-      DataTra = DataTra.month -1
+      DataTra = DataTra.month -1 # Pegando apenas os meses
+
       ListaDatas = []
 
+      # Estrutura de repetição para adicionar as datas em uma lista 
       for i in range(Delta.days + 1):
           DataAtu = Data1f +timedelta(days=i)
           if DataTra != DataAtu.month:
@@ -148,7 +153,8 @@ class AppDownload(Tk):
               ListaDatas.append(DataAtu)
       ListaDatasStr = [datetime.strftime(dt,format='%d/%m/%Y') for dt in ListaDatas]
 
-      dic ={}
+      # Criação de um dicionario e estrutura de repetição para calculo de juros e criação de arquivo .xlsx
+      dic ={}   
       for i in ListaDatasStr:
           DataIns = date(int(i[6:10]),int(i[3:5]),int(i[:2]))
 
@@ -166,11 +172,12 @@ class AppDownload(Tk):
 
           dic[i] = Ins
           Plan = pd.DataFrame.from_dict(dic,orient='index')
-          Plan.to_excel(f'.\\DesktopApp\\Juros.xlsx',index=False)
+          Plan.to_excel(f'.\\DesktopApp\\Calculo de Juros\\Juros.xlsx',index=False)
 
       messagebox.showinfo('Aviso','Arquivo Gerado com Sucesso')
-      webbrowser.open(os.path.realpath('.\\DesktopApp'))
+      webbrowser.open(os.path.realpath('.\\DesktopApp\\Calculo de Juros'))
 
+# Loop para inicializção da janela
 if __name__ == "__main__":
   root = AppDownload()
   root.mainloop()
