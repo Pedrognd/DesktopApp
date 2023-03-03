@@ -166,10 +166,10 @@ class AppDownload(Tk):
 
           dic[i] = Ins
           Plan = pd.DataFrame.from_dict(dic,orient='index')
-          Plan.to_excel(f'.\\DesktopApp\\Juros.xlsx',index=False)
+          Plan.to_excel(f'.\\DesktopApp\\Calculo de Juros\\Juros.xlsx',index=False)
 
       messagebox.showinfo('Aviso','Arquivo Gerado com Sucesso')
-      webbrowser.open(os.path.realpath('.\\DesktopApp'))
+      webbrowser.open(os.path.realpath('.\\DesktopApp\\Calculo de Juros'))
 
 if __name__ == "__main__":
   root = AppDownload()
