@@ -31,7 +31,7 @@ class AppLinkScreen(Tk):
 
         # Definições Padrões
         self.title('Vincular Contas')
-        self.geometry('400x400')
+        self.geometry('450x300')
         self.DefaultFont = 'Arial'
         self.configure(bg='#3F3C52')
         self.DefaultBg = '#3F3C52'
@@ -116,20 +116,33 @@ class AppLinkScreen(Tk):
         self.PassWordLabel.pack(side=LEFT,padx=8,pady=10)
 
         self.PassWordEntry = Entry(self.SixthContainer)
+        self.PassWordEntry['width'] = tamanho + 5 
         self.PassWordEntry['font'] = (self.DefaultFont, 10)       
         self.PassWordEntry.pack(side=LEFT)
 
         self.PassWordBtt = Button(self.SixthContainer)
         self.PassWordBtt['text'] = 'Gerar'
-        self.PassWordBtt['font'] = (self.DefaultFont, 10)   
+        self.PassWordBtt['font'] = (self.DefaultFont, 10, 'bold')   
         self.PassWordBtt['command'] = self.Gerar    
         self.PassWordBtt.pack(side=LEFT, **self.DefaultPadding)
 
-        self.BttGerar = Button(self.SeventhContainer)
-        self.BttGerar['text'] = 'Salvar'
-        self.BttGerar['font'] = (self.DefaultFont, 10, 'bold')
-        self.BttGerar['command'] = self.Save
-        self.BttGerar.pack(**self.DefaultPadding)
+        self.BttSave = Button(self.SeventhContainer)
+        self.BttSave['text'] = 'Salvar'
+        self.BttSave['font'] = (self.DefaultFont, 10, 'bold')
+        self.BttSave['command'] = self.Save
+        self.BttSave.pack(side=LEFT,**self.DefaultPadding)
+
+        self.BttEdit = Button(self.SeventhContainer)
+        self.BttEdit['text'] = 'Editar'
+        self.BttEdit['font'] = (self.DefaultFont, 10, 'bold')
+        self.BttEdit['command'] = self.Edit
+        self.BttEdit.pack(side=LEFT,**self.DefaultPadding)
+
+        self.BttView = Button(self.SeventhContainer)
+        self.BttView['text'] = 'Visualizar'
+        self.BttView['font'] = (self.DefaultFont, 10, 'bold')
+        self.BttView['command'] = self.View
+        self.BttView.pack(side=LEFT,**self.DefaultPadding)
 
     def Gerar(self):  
         valores = string.ascii_letters + string.digits
@@ -143,9 +156,13 @@ class AppLinkScreen(Tk):
         self.PassWordEntry['state'] = 'readonly'
 
     def Save(self):
-        # ins = 
         pass
     
+    def Edit(self):
+        pass
+
+    def View(self):
+        pass   
 if __name__ == "__main__":
   root = AppLinkScreen()
   root.mainloop()
