@@ -92,6 +92,12 @@ class AppPasswordGenerator(Tk):
     self.CopyPassword.delete(0,END)
     self.CopyPassword.insert(0,senha)
     self.CopyPassword['state'] = 'readonly'
+
+  def Vincular(self):
+    pass
+
+  def Visu(self):
+    pass
   
 if __name__ == "__main__":
   root = AppPasswordGenerator()
