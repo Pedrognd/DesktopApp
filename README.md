@@ -10,3 +10,4 @@ sendo elas:
 - pip install pytube
 - pip install moviepy
 - pip install pandas
+- pip install win10toast
