@@ -171,11 +171,19 @@ class AppDownload(Tk):
           }
 
           dic[i] = Ins
-          Plan = pd.DataFrame.from_dict(dic,orient='index')
-          Plan.to_excel(f'.\\DesktopApp\\Calculo de Juros\\Juros.xlsx',index=False)
+
+      Plan = pd.DataFrame.from_dict(dic,orient='index')
+      dire = f'.\\Calculo de Juros'
+
+      if os.path.isdir(dire):
+        pass
+      else:
+         os.mkdir(dire)
+
+      Plan.to_excel(f'Calculo de Juros\\Juros.xlsx',index=False)
 
       messagebox.showinfo('Aviso','Arquivo Gerado com Sucesso')
-      webbrowser.open(os.path.realpath('.\\DesktopApp\\Calculo de Juros'))
+      webbrowser.open(os.path.realpath('./Calculo de Juros'))
 
 # Loop para inicializção da janela
 if __name__ == "__main__":
