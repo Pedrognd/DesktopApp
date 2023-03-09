@@ -3,28 +3,10 @@ import os
 from tkinter import ttk as c, messagebox
 from tkinter import *
 from random import choice
+import pandas as pd
 from pandastable import Table
 import string
 
-
-
-dire = f'.\\Gen'
-if os.path.isdir(dire):
-    pass
-else:
-    os.mkdir(dire)
-
-con = sql.connect('./Gen/accounts.db')
-cur = con.cursor()
-
-table = """CREATE TABLE IF NOT EXISTS CONTAS
-(ID INTEGER PRIMARY KEY AUTOINCREMENT,
-LOCAL TEXT NOT NULL,
-USER  TEXT NOT NULL,
-EMAIL TEXT NOT NULL,
-SENHA TEXT NOT NULL )"""
-
-cur.execute(table)
 
 class AppLinkScreen(Tk):
     def __init__(self):
@@ -152,37 +134,58 @@ class AppLinkScreen(Tk):
         for i in range(20):
             senha += choice(valores)
 
-        self.PassWordEntry['state'] = 'normal'
         self.PassWordEntry.delete(0,END)
         self.PassWordEntry.insert(0,senha)
 
     def Save(self):
+        # Salvar conts no banco de dados
         Local = self.LocalEntry.get()
         User = self.UserEntry.get()
         Email = self.EmailEntry.get()
         PassWord = self.PassWordEntry.get()
 
-        if (Local != '') & (User != '') & (Email != '') & (PassWord  != ''):
-            cur = con.cursor()
-            cur.execute('''INSERT INTO CONTAS (LOCAL,USER,EMAIL,SENHA) VALUES (?, ?, ?, ?)''', (Local,User,Email,PassWord))
-            con.commit()
+        # if (Local != '') & (User != '') & (Email != '') & (PassWord  != ''):
+        #     cur = con.cursor()
+        #     cur.execute('''INSERT INTO CONTAS (LOCAL,USER,EMAIL,SENHA) VALUES (?, ?, ?, ?)''', (Local,User,Email,PassWord))
+        #     con.commit()
 
-            messagebox.showinfo("Cadastro", "Cadastro efetuado com sucesso.")
-        else:
-            messagebox.showinfo("Cadastro", "Preencha todos os campos!")
+        #     messagebox.showinfo("Cadastro", "Cadastro efetuado com sucesso.")
+        # else:
+        #     messagebox.showinfo("Cadastro", "Preencha todos os campos!")
     
     def Edit(self):
+        # digitar o id e deletar a conta do db
         pass
 
     def View(self):
-        dados = []
-        cur.execute('SELECT * FROM CONTAS')
-        rows = cur.fetchall()
-        for i in rows:
-            dados.append(i)
-
-        
+        # Chamar tela de visualização das contas salvas
+        pass
         
 if __name__ == "__main__":
   root = AppLinkScreen()
   root.mainloop()
+
+'''
+from tkinter import *
+from pandastable import Table, TableModel
+
+class TestApp(Frame):
+        """Basic test frame for the table"""
+        def __init__(self, parent=None):
+            self.parent = parent
+            Frame.__init__(self)
+            self.main = self.master
+            self.main.geometry('600x400+200+100')
+            self.main.title('Table app')
+            f = Frame(self.main)
+            f.pack(fill=BOTH,expand=1)
+            df = TableModel.getSampleData()
+            self.table = pt = Table(f, dataframe=df,
+                                    showtoolbar=True, showstatusbar=True)
+            pt.show()
+            return
+
+app = TestApp()
+#launch the app
+app.mainloop()
+'''
