@@ -3,6 +3,7 @@ import os
 from tkinter import ttk as c, messagebox
 from tkinter import *
 from random import choice
+from pandastable import Table
 import string
 
 
@@ -174,7 +175,13 @@ class AppLinkScreen(Tk):
         pass
 
     def View(self):
-        pass   
+        dados = []
+        cur.execute('SELECT * FROM CONTAS')
+        rows = cur.fetchall()
+        for i in rows:
+            dados.append(i)
+
+        
         
 if __name__ == "__main__":
   root = AppLinkScreen()
