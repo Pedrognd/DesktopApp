@@ -1,11 +1,11 @@
 import sqlite3 as sql
 import os
-from tkinter import ttk as c
+from tkinter import ttk as c, messagebox
 from tkinter import *
 from random import choice
 import string
 
-tamanho = 20
+
 
 dire = f'.\\Gen'
 if os.path.isdir(dire):
@@ -116,7 +116,7 @@ class AppLinkScreen(Tk):
         self.PassWordLabel.pack(side=LEFT,padx=8,pady=10)
 
         self.PassWordEntry = Entry(self.SixthContainer)
-        self.PassWordEntry['width'] = tamanho + 5 
+        self.PassWordEntry['width'] = 25
         self.PassWordEntry['font'] = (self.DefaultFont, 10)       
         self.PassWordEntry.pack(side=LEFT)
 
@@ -144,25 +144,38 @@ class AppLinkScreen(Tk):
         self.BttView['command'] = self.View
         self.BttView.pack(side=LEFT,**self.DefaultPadding)
 
-    def Gerar(self):  
+    def Gerar(self):
+
         valores = string.ascii_letters + string.digits
         senha = ''
-        for i in range(tamanho):
+        for i in range(20):
             senha += choice(valores)
 
         self.PassWordEntry['state'] = 'normal'
         self.PassWordEntry.delete(0,END)
         self.PassWordEntry.insert(0,senha)
-        self.PassWordEntry['state'] = 'readonly'
 
     def Save(self):
-        pass
+        Local = self.LocalEntry.get()
+        User = self.UserEntry.get()
+        Email = self.EmailEntry.get()
+        PassWord = self.PassWordEntry.get()
+
+        if (Local != '') & (User != '') & (Email != '') & (PassWord  != ''):
+            cur = con.cursor()
+            cur.execute('''INSERT INTO CONTAS (LOCAL,USER,EMAIL,SENHA) VALUES (?, ?, ?, ?)''', (Local,User,Email,PassWord))
+            con.commit()
+
+            messagebox.showinfo("Cadastro", "Cadastro efetuado com sucesso.")
+        else:
+            messagebox.showinfo("Cadastro", "Preencha todos os campos!")
     
     def Edit(self):
         pass
 
     def View(self):
         pass   
+        
 if __name__ == "__main__":
   root = AppLinkScreen()
   root.mainloop()
