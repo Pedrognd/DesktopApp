@@ -25,21 +25,21 @@ def CreateDB(File):
                     EMAIL   TEXT NOT NULL,
                     PASSWORD   TEXT NOT NULL
                 )
-    '''
+            '''
     
     cur.execute(Table)
     con.commit()
     con.close()
 
-#### Crud ####
+#### CRUD ####
 
 def Select(i):
     con = sql.connect(f'.\\Gen\\Account.db')
     cur = con.cursor()
 
     Query = '''
-                SELECT ? FROM ACCOUNTS
-    '''
+                SELECT * FROM ACCOUNTS WHERE ID=?
+            '''
     cur.execute(Query,i)
 
 def Insert(i):
@@ -52,7 +52,7 @@ def Insert(i):
                                      EMAIL,
                                      PASSWORD)
                                VALUES(?,?,?,?)
-    '''
+            '''
     cur.execute(Query,i)
     con.commit()
     con.close()
@@ -67,7 +67,7 @@ def Update(i):
                                     EMAIL = ?,
                                     PASSWORD = ?
                                     WHERE ID = ?    
-    '''
+             '''
     cur.execute(Query,i)
     con.commit()
     con.close()
@@ -78,7 +78,7 @@ def Delete(i):
 
     Query = '''
                 DELETE FROM ACCOUNTS WHERE ID = ?
-    '''
+             '''
     cur.execute(Query,i)
     con.commit()
     con.close()
