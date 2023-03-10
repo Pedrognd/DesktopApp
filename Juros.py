@@ -172,17 +172,23 @@ class AppDownload(Tk):
 
           dic[i] = Ins
 
+      # Criandodo dataframe com a biblioteca pandas
       Plan = pd.DataFrame.from_dict(dic,orient='index')
       dire = f'.\\Calculo de Juros'
 
+      # Verificando se o diretorio existe
       if os.path.isdir(dire):
         pass
       else:
          os.mkdir(dire)
 
+      # Convertendo de pandas para um arquivo excel
       Plan.to_excel(f'Calculo de Juros\\Juros.xlsx',index=False)
 
+      # Menssagem de aviso
       messagebox.showinfo('Aviso','Arquivo Gerado com Sucesso')
+
+      # Abrir o local onde foi salvo o arquivo
       webbrowser.open(os.path.realpath('./Calculo de Juros'))
 
 # Loop para inicializção da janela
