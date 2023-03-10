@@ -1,11 +1,12 @@
 import sqlite3 as sql
+import pandas as pd
+import string
 import os
 from tkinter import ttk as c, messagebox
-from tkinter import *
-from random import choice
-import pandas as pd
 from pandastable import Table
-import string
+from random import choice
+from tkinter import *
+from Views import *
 
 
 class AppLinkScreen(Tk):
@@ -118,7 +119,7 @@ class AppLinkScreen(Tk):
         self.BttEdit = Button(self.SeventhContainer)
         self.BttEdit['text'] = 'Editar'
         self.BttEdit['font'] = (self.DefaultFont, 10, 'bold')
-        self.BttEdit['command'] = self.Edit
+        self.BttEdit['command'] = self.Delete
         self.BttEdit.pack(side=LEFT,**self.DefaultPadding)
 
         self.BttView = Button(self.SeventhContainer)
@@ -144,48 +145,22 @@ class AppLinkScreen(Tk):
         Email = self.EmailEntry.get()
         PassWord = self.PassWordEntry.get()
 
-        # if (Local != '') & (User != '') & (Email != '') & (PassWord  != ''):
-        #     cur = con.cursor()
-        #     cur.execute('''INSERT INTO CONTAS (LOCAL,USER,EMAIL,SENHA) VALUES (?, ?, ?, ?)''', (Local,User,Email,PassWord))
-        #     con.commit()
-
-        #     messagebox.showinfo("Cadastro", "Cadastro efetuado com sucesso.")
-        # else:
-        #     messagebox.showinfo("Cadastro", "Preencha todos os campos!")
+        if (Local != '') & (User != '') & (Email != '') & (PassWord  != ''):
+            Insert((Local,User,Email,PassWord))
+            messagebox.showinfo("Cadastro", "Cadastro efetuado com sucesso.")
+        else:
+            messagebox.showinfo("Cadastro", "Preencha todos os campos!")
     
-    def Edit(self):
+    def Delete(self):
         # digitar o id e deletar a conta do db
         pass
 
     def View(self):
         # Chamar tela de visualização das contas salvas
-        pass
-        
+        if __name__ == '__main__':
+            root0 = ViewsAccounts()
+            root0.mainloop()
+
 if __name__ == "__main__":
   root = AppLinkScreen()
   root.mainloop()
-
-'''
-from tkinter import *
-from pandastable import Table, TableModel
-
-class TestApp(Frame):
-        """Basic test frame for the table"""
-        def __init__(self, parent=None):
-            self.parent = parent
-            Frame.__init__(self)
-            self.main = self.master
-            self.main.geometry('600x400+200+100')
-            self.main.title('Table app')
-            f = Frame(self.main)
-            f.pack(fill=BOTH,expand=1)
-            df = TableModel.getSampleData()
-            self.table = pt = Table(f, dataframe=df,
-                                    showtoolbar=True, showstatusbar=True)
-            pt.show()
-            return
-
-app = TestApp()
-#launch the app
-app.mainloop()
-'''
