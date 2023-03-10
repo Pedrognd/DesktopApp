@@ -11,3 +11,4 @@ sendo elas:
 - pip install moviepy
 - pip install pandas
 - pip install openpyxl
+- pip install pandastable
