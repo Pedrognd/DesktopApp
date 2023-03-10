@@ -1,6 +1,7 @@
 #### Importações ####
 from pandastable import Table
 from tkinter import *
+from tkinter import messagebox
 import pandas as pd
 import sqlite3 as sql
 import os
@@ -27,15 +28,8 @@ def CreateDB(File):
     '''
     
     cur.execute(Table)
-
-#### Conexão ####
-
-def ConnectDb(File):
-
-    con = sql.connect(f'./Gen/{File}')
-    cur = con.cursor()
-    return cur
-
+    con.commit()
+    con.close()
 
 #### Crud ####
 
@@ -90,11 +84,58 @@ def Delete(i):
     con.close()
 
 #### Funcs Proprias ####
+def DeleteAccount():
+    class DeleteAccountId(Tk):
+        def __init__(self):
+            super().__init__()
+
+            self.title('Deletar Conta')
+            # self.geometry('450x300')
+            self.DefaultFont = 'Arial'
+            self.configure(bg='#3F3C52')
+            self.DefaultBg = '#3F3C52'
+
+            self.DefaultPadding = {'padx': 10,
+                                    'pady': 10}
+
+            self.FirstContainer = Frame(self)
+            self.FirstContainer['bg'] = self.DefaultBg
+            self.FirstContainer.pack()
+
+            self.SecondContainer = Frame(self)
+            self.SecondContainer['bg'] = self.DefaultBg
+            self.SecondContainer.pack()
+
+            self.IdLabel = Label(self.FirstContainer)
+            self.IdLabel['text'] = 'Insira o Id:'
+            self.IdLabel['font'] = (self.DefaultFont,10,'bold')
+            self.IdLabel['foreground'] = 'white'
+            self.IdLabel['bg'] = self.DefaultBg
+            self.IdLabel.pack(side=LEFT,**self.DefaultPadding)
+
+            self.IDEntry = Entry(self.FirstContainer)
+            self.IDEntry['font'] = (self.DefaultFont, 10)       
+            self.IDEntry.pack(side=LEFT,**self.DefaultPadding)      
+
+            self.IdBtt = Button(self.SecondContainer)
+            self.IdBtt['text'] = 'Confirmar'
+            self.IdBtt['font'] = (self.DefaultFont, 10, 'bold')   
+            self.IdBtt['command'] = self.GetId
+            self.IdBtt.pack(side=LEFT, **self.DefaultPadding)     
+
+        def GetId(self):
+            Id = self.IDEntry.get()
+            Delete(Id)
+            messagebox.showinfo('Deletar Conta', 'Conta Deletada com sucesso!')
+
+    return DeleteAccountId()
 
 def ViewsAccounts():
 
     Data = []
-    Cur = ConnectDb('Account.db')
+    Con = sql.connect(f'.\\Gen\\Account.db')
+    Cur = Con.cursor()
+
     Query = '''
                 SELECT * FROM ACCOUNTS
             '''
@@ -119,4 +160,5 @@ def ViewsAccounts():
             self.Table = pt = Table(self.FrameView,dataframe=df,showstatusbar=False,showtoolbar=False,editable=False)
             pt.show()
     
+    Con.close()
     return View()

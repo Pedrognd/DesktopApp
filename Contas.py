@@ -8,6 +8,7 @@ from random import choice
 from tkinter import *
 from Views import *
 
+CreateDB('Account.db')
 
 class AppLinkScreen(Tk):
     def __init__(self):
@@ -117,7 +118,7 @@ class AppLinkScreen(Tk):
         self.BttSave.pack(side=LEFT,**self.DefaultPadding)
 
         self.BttEdit = Button(self.SeventhContainer)
-        self.BttEdit['text'] = 'Editar'
+        self.BttEdit['text'] = 'Excluir'
         self.BttEdit['font'] = (self.DefaultFont, 10, 'bold')
         self.BttEdit['command'] = self.Delete
         self.BttEdit.pack(side=LEFT,**self.DefaultPadding)
@@ -153,13 +154,15 @@ class AppLinkScreen(Tk):
     
     def Delete(self):
         # digitar o id e deletar a conta do db
-        pass
+        if __name__ == '__main__':
+            root = DeleteAccount()
+            root.mainloop()
 
     def View(self):
         # Chamar tela de visualização das contas salvas
         if __name__ == '__main__':
-            root0 = ViewsAccounts()
-            root0.mainloop()
+            root = ViewsAccounts()
+            root.mainloop()
 
 if __name__ == "__main__":
   root = AppLinkScreen()
