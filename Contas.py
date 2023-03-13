@@ -8,9 +8,7 @@ from random import choice
 from tkinter import *
 from Views import *
 
-CreateDB('Account.db')
-
-class AppLinkScreen(Tk):
+class AppAccount(Tk):
     def __init__(self):
         super().__init__()
 
@@ -159,12 +157,10 @@ class AppLinkScreen(Tk):
     
     def Delete(self):
         # digitar o id e deletar a conta do db
-        if __name__ == '__main__':
             root = DeleteAccount()
             root.mainloop()
 
     def View(self):
         # Chamar tela de visualização das contas salvas
-        if __name__ == '__main__':
             root = ViewsAccounts()
             root.mainloop()

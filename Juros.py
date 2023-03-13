@@ -15,7 +15,7 @@ import http.client
 http.client.HTTPConnection._http_vsn = 10
 http.client.HTTPConnection._http_vsn_str = 'HTTP/1.0'
 
-class AppDownload(Tk):
+class AppJuros(Tk):
     def __init__(self):
         super().__init__()
 

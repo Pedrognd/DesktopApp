@@ -4,6 +4,8 @@ from Contas import *
 from Download import *
 from Juros import *
 
+CreateDB('Account.db')
+
 class AppMain(Tk):
     def __init__(self):
         super().__init__()
@@ -35,18 +37,18 @@ class AppMain(Tk):
 
     def StartContas(self):
         if __name__ == "__main__":
-            root = AppLinkScreen()
-            root.mainloop()
+            root01 = AppAccount()
+            root01.mainloop()
 
     def StartDownload(self):
         if __name__ == "__main__":
-            root = AppDownload()
-            root.mainloop()
+            root02 = AppDownload()
+            root02.mainloop()
 
     def StartJuros(self):
         if __name__ == "__main__":
-            root = AppDownload()
-            root.mainloop()
+            root03 = AppJuros()
+            root03.mainloop()
             
 if __name__ == '__main__':
     root = AppMain()
