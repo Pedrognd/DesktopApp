@@ -168,7 +168,3 @@ class AppLinkScreen(Tk):
         if __name__ == '__main__':
             root = ViewsAccounts()
             root.mainloop()
-
-if __name__ == "__main__":
-  root = AppLinkScreen()
-  root.mainloop()

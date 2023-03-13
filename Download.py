@@ -159,8 +159,3 @@ class AppDownload(Tk):
     #   Função de abrir local do arquivo, onde foi baixado o Mp3/Mp4
     def OpenFileLocation(self):
         webbrowser.open(os.path.realpath(self.BttDir['text'] + '/Downloads'))
-
-#   Loop para iniciar a janela
-if __name__ == "__main__":
-  root = AppDownload()
-  root.mainloop()

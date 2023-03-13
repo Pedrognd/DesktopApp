@@ -190,8 +190,3 @@ class AppDownload(Tk):
 
       # Abrir o local onde foi salvo o arquivo
       webbrowser.open(os.path.realpath('./Calculo de Juros'))
-
-# Loop para inicializção da janela
-if __name__ == "__main__":
-  root = AppDownload()
-  root.mainloop()
