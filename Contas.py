@@ -149,6 +149,11 @@ class AppLinkScreen(Tk):
         if (Local != '') & (User != '') & (Email != '') & (PassWord  != ''):
             Insert((Local,User,Email,PassWord))
             messagebox.showinfo("Cadastro", "Cadastro efetuado com sucesso.")
+            self.LocalEntry.delete(0,END)
+            self.UserEntry.delete(0,END)
+            self.EmailEntry.delete(0,END)
+            self.PassWordEntry.delete(0,END)
+            self.View()
         else:
             messagebox.showinfo("Cadastro", "Preencha todos os campos!")
     

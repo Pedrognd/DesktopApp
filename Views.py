@@ -79,7 +79,7 @@ def Delete(i):
     Query = '''
                 DELETE FROM ACCOUNTS WHERE ID = ?
              '''
-    cur.execute(Query,i)
+    cur.execute(Query,[i])
     con.commit()
     con.close()
 
@@ -124,9 +124,10 @@ def DeleteAccount():
             self.IdBtt.pack(side=LEFT, **self.DefaultPadding)     
 
         def GetId(self):
-            Id = self.IDEntry.get()
-            Delete(Id)
+            Ids = self.IDEntry.get()
+            Delete(Ids)
             messagebox.showinfo('Deletar Conta', 'Conta Deletada com sucesso!')
+            self.destroy()
 
     return DeleteAccountId()
 
